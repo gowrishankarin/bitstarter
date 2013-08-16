@@ -21,7 +21,7 @@ if(!global.hasOwnProperty('db')) {
 		};
 		sq = new Sequelize(dbname, user, password, config);
 	} else {
-		var pgtokens = "localhost:5432:bitdb0:ubuntu:bitpass0";
+		var pgtokens = "localhost:5432:bitdb0:gary:bb";
 		var host = pgtokens[0];
 		var port = pgtokens[1];
 		var dbname = pgtokens[2];
