@@ -21,24 +21,34 @@ if(!global.hasOwnProperty('db')) {
 		};
 		sq = new Sequelize(dbname, user, password, config);
 	} else {
-		var pgtokens = "localhost:5432:bitdb0:gary:bb";
+		/*var pgtokens = "fs.readFileSync(PGPASS_FILE).toString().split(':')";
 		var host = pgtokens[0];
 		var port = pgtokens[1];
 		var dbname = pgtokens[2];
 		var user = pgtokens[3];
-		var password = pgtokens[4];
+		var password = pgtokens[4];*/
 		var config = {
 			dialect: 'postgres',
 			protocol: 'postgres',
 			port: port,
 			host: host
 		}
-		sq = new Sequelize(dbname, user, password, config);
+		sq = new Sequelize("test_dev", "gary", "", config);
 	}
 	global.db = {
 		Sequelize: Sequelize,
 		sequelize: sq,
 		Order: sq.import(__dirname + '/order')
 	};
+	//global.db.Order.findAll();
 }
 module.exports = global.db;
+
+/*
+http://blog.willj.net/2011/05/31/setting-up-postgresql-for-ruby-on-rails-development-on-os-x/
+
+https://devcenter.heroku.com/articles/postgres-the-bits-you-havent-found-yet
+http://dailyjs.com/2011/09/26/heroku/
+https://devcenter.heroku.com/articles/heroku-postgresql
+
+*/

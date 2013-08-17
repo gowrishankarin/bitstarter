@@ -5,19 +5,16 @@ var http = require('http');
 var https = require('https');
 var db = require('./models');
 
-var app = express.createServer(express.logger());
+var app = express();
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
+app.set('port', process.env.PORT || 8080);
 
+console.log(__dirname);
 
 app.get('/', function(request, response) {
   var data = fs.readFileSync('index.html');
   response.send(data.toString());
-});
-
-var port = process.env.PORT || 8080;
-app.listen(port, function() {
-  console.log("Listening on " + port);
 });
 
 app.get('/orders', function(request, response) {
@@ -36,6 +33,7 @@ app.get('/orders', function(request, response) {
 app.get('/refresh_orders', function(request, response) {
 	https.get("https://coinbase.com/api/v1/orders?api_key=" + process.env.COINBASE_API_KEY, function(res) {
 		var body = '';
+
 		res.on('data', function(chunk) {body += chunk;});
 		res.on('end', function() {
 			try {
