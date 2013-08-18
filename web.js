@@ -23,6 +23,7 @@ app.get('/orders', function(request, response) {
 		orders.forEach(function(order) {
 			orders_json.push({id:order.coinbase_id, amount: order.amount, time: order.time});
 		});
+		console.log(orders);
 		response.render("orders", {orders: orders_json});
 	}).error(function(err) {
 		console.log(err);
